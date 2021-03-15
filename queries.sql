@@ -52,6 +52,10 @@ insert into Parents(surname, given_name, email)
             ('John', 'Smith', 'john@smith.com');
 
 
+insert into Parents(surname, given_name, email) 
+    VALUES ('Gadot', 'Gull', 'gull@gadot.com.sg'),
+            ('Smeg', 'Amira', 'aamira@test.com');
+
 -- see all rows in a table
 select * from Parents;
 
@@ -84,3 +88,21 @@ insert into Venues(address)
             ("Sengkang Swimming Complex");
 
 describe Venues;
+
+/* Foreign Keys */ 
+-- line 96 creates the column 
+-- line 97 defines the foreign key 
+create table Students (
+    student_id int unsigned auto_increment primary key,
+    surname varchar(100) not null,
+    given_name varchar(100) not null,
+    date_of_birth date not null,
+    parent_id int unsigned not null,
+    foreign key(parent_id) references Parents(parent_id)
+)engine=innodb;
+
+insert into Students(surname,given_name,date_of_birth, parent_id)
+    VALUES ('Phua', 'Jonathan', '2001-04-05', 1);
+
+insert into Students(surname,given_name,date_of_birth, parent_id)
+    VALUES ('Sue', 'Lexi', '2001-01-20', 2);
