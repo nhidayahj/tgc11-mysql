@@ -92,6 +92,7 @@ describe Venues;
 /* Foreign Keys */ 
 -- line 96 creates the column 
 -- line 97 defines the foreign key 
+-- forign key data type MUST Follow the data type of the referenced table
 create table Students (
     student_id int unsigned auto_increment primary key,
     surname varchar(100) not null,
@@ -106,3 +107,51 @@ insert into Students(surname,given_name,date_of_birth, parent_id)
 
 insert into Students(surname,given_name,date_of_birth, parent_id)
     VALUES ('Sue', 'Lexi', '2001-01-20', 2);
+
+
+create table Sessions (
+    sess_id int unsigned auto_increment primary key,
+    venue_id int unsigned,
+    foreign key(venue_id) references Venues(venue_id)
+)engine=innodb;
+
+insert into Sessions (venue_id) 
+    VALUES ()
+
+
+/* 3 delete rules for Foreign key */
+-- on delete restrict (default / normal)
+-- on delete cascade (most convenient but MOST dangerous)
+-- on delete set null (only when the data type is set to null)
+-- using soft / fake delete (However, illegal)
+-- 
+
+create table CertificateStudent (
+    certificate_student_id int unsigned auto_increment primary key,
+    student_id int unsigned,
+    certificates_id int unsigned,
+    award_date date not null,
+    foreign key(student_id) references Students(student_id),
+    foreign key(certificates_id) references Certificates(certificates_id)
+)engine=innodb;
+
+insert into CertificateStudent(student_id, certificates_id, award_date)
+    VALUES (2, 3, '2015-06-01');
+
+
+
+/* ALTERING TABLE */ 
+
+-- Add a new column to an existing table
+alter table Students add gender varchar(1) not null;
+
+-- rename a column 
+alter table Students rename column surname to last_name;
+alter table Students rename column given_name to first_name;
+
+-- Modify the definition of a column 
+alter table Students modify gender varchar(1); -- chnages the Gender from Not Null to YES 
+
+
+-- assumes we have a table named 'Fake'
+drop table Fake; -- delete a table 
