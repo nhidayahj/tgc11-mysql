@@ -165,3 +165,19 @@ delete from Parents where parent_id=4;
 
 /* to modify a row, we use UPDATE */ 
 update Students set first_name = "Lixie" where student_id =2;
+
+
+/* Add in a foreign key after a table has been created */
+create table Coaches (
+    coach_id tinyint unsigned auto_increment primary key,
+    `name` varchar(100) not null
+)engine=innodb;
+
+/* 1. add in the new column to the Sessions table */
+alter table Sessions add coach_id tinyint unsigned not null;
+
+alter table Sessions add session_date datetime not null;
+
+
+/* 2. add in foreign key definition */ 
+alter table Sessions add foreign key (coach_id) references Coaches(coach_id);
