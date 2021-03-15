@@ -1,6 +1,9 @@
 /* logging in */
 mysql -u root
 
+/* to quite mySQL terminal */ 
+quit 
+
 /* see all databases */
 show databases;
 
@@ -155,3 +158,10 @@ alter table Students modify gender varchar(1); -- chnages the Gender from Not Nu
 
 -- assumes we have a table named 'Fake'
 drop table Fake; -- delete a table 
+
+
+/* to DELETE a row, we use DELETE FROM */
+delete from Parents where parent_id=4;
+
+/* to modify a row, we use UPDATE */ 
+update Students set first_name = "Lixie" where student_id =2;
