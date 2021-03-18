@@ -53,6 +53,20 @@ GROUP BY BillingCountry
 HAVING SUM(Total) > 100
 LIMIT 10;
 
-/* 9 - Using the Invoice table, show the average payment made for each customer, but only for customer reside in Germany 
-and only if that customer has paid more than 10in total */
-SELECT Invoice.CustomerId, AVG(Invoice.Total), SUM(Invoice.Total), Customer.
+/* Q9 */
+SELECT Invoice.CustomerId, AVG(Invoice.Total), SUM(Invoice.Total), Customer.Country
+FROM Invoice
+JOIN Customer
+ON Invoice.CustomerId = Customer.CustomerId
+WHERE Customer.Country = "Germany"
+GROUP BY Invoice.CustomerId, Customer.Country
+HAVING SUM(Invoice.Total) > 10;
+
+
+/* Q10 */
+SELECT Album.AlbumId, Album.Title, AVG(Track.Milliseconds)
+FROM Track
+JOIN Genre ON Track.GenreId = Genre.GenreId
+JOIN Album ON Track.AlbumId = Album.AlbumId
+WHERE Genre.Name = 'Jazz'
+GROUP BY Album.AlbumId, Album.Title;
