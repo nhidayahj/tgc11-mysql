@@ -12,3 +12,8 @@ yarn add handlebars-helpers
 - learn technique on array and object destructuring 
 - useful when doing mysql with express
 ```
+
+```
+Use 'prepared statements' to avoid SQL Injection
+
+```
